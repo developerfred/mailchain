@@ -29,8 +29,13 @@ type SignerOptions struct {
 	ChainID *big.Int
 }
 
-func NewSigner(privateKey crypto.PrivateKey) Signer {
-	return Signer{privateKey: privateKey}
+func NewSigner(privateKey crypto.PrivateKey, publicKey crypto.PublicKey) Signer {
+	if VerifySignature(publicKey) == true {
+		return Signer{privateKey: privateKey}
+	} else {
+		return false, erros.New("opts Public key is not valid")
+	}
+
 }
 
 type Signer struct {
