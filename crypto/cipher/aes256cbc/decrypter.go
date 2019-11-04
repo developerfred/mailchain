@@ -27,7 +27,12 @@ import (
 )
 
 // NewDecrypter create a new decrypter attaching the private key to it
-func NewDecrypter(privateKey crypto.PrivateKey) Decrypter {
+// Check the private key type is valid
+func NewDecrypter(privateKey crypto.PrivateKey, publicKey privateKey.public()) Decrypter {
+	ok  := publicKey.(*ecdsa.PublicKey)
+	if !ok {
+		return log.Fatal("cannot assert type: publicKey is not of type *ecdsa.PublicKey")
+	}
 	return Decrypter{privateKey: privateKey}
 }
 
