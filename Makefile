@@ -3,6 +3,26 @@ GO := go
 all : build
 .PHONY: clean test all
 
+help:
+	@echo 'Usage: make <OPTIONS> ... <TARGETS>'
+	@echo ''
+	@echo 'Available targets are:'
+	@echo ''
+	@echo '    help               Show this help screen.'
+	@echo '    clean              Remove binaries, artifacts and releases.'
+	@echo '    test               Generate Unit test.'
+	@echo '    unit-test          Run test.'
+	@echo '    proto              Run proto.'
+	@echo '    lint               Run golint.'
+	@echo '    snapshots          Run snapshots.'
+	@echo '    fmt                Run go fmt.'
+	@echo '    build              Build project for current platform.'
+	@echo '    go-generation      Open go generate.'
+	@echo '    generate           Generate License.'
+	@echo '    openapi:           Generate Api'
+	@echo ''
+	@echo ''
+
 clean:
 	$(GO) clean
 build:
@@ -50,7 +70,9 @@ openapi:
 	echo '}' >>  ./cmd/mailchain/internal/http/handlers/openapi.go
 	addlicense -l apache -c Finobo ./cmd/mailchain/internal/http/handlers/openapi.go	
 	rm -rf vendor
-	
+fmt:
+	go fmt ./...
+
 snapshot:
 	docker run --rm --privileged -v $(CURDIR):/go/src/github.com/mailchain/mailchain -v /var/run/docker.sock:/var/run/docker.sock -w /go/src/github.com/mailchain/mailchain mailchain/goreleaser-xcgo goreleaser --snapshot --rm-dist
 
