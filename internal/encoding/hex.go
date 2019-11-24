@@ -47,3 +47,27 @@ func DecodeZeroX(in string) ([]byte, error) {
 
 	return hex.DecodeString(in[2:])
 }
+
+// EncodeHex returns the hexadecimal encoding of src.
+//
+func EncodeHex(src []byte) string {
+	out := make([]byte, hex.EncodedLen(len(src)))
+	hex.Encode(out, src)
+
+	return string(out)
+}
+
+// DecodeHex returns the bytes represented by the hexadecimal string s.
+//
+// DecodeHex  expects that src contains only hexadecimal
+// characters and that src has even length.
+// If the input is malformed, DecodeString returns
+// the bytes decoded before the error.
+func DecodeHex(s string) ([]byte, error) {
+	dec, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, errors.Errorf("empty hex string")
+	}
+
+	return dec, nil
+}
