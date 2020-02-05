@@ -79,7 +79,7 @@ func GetPublicKey(finders map[string]mailbox.PubKeyFinder) func(w http.ResponseW
 		}
 
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(GetPublicKeyResponseBody{
+		- = json.NewEncoder(w).Encode(GetPublicKeyResponseBody{
 			PublicKey:                encodedKey,
 			PublicKeyEncoding:        encodingType,
 			SupportedEncryptionTypes: encryptionTypes,
@@ -157,13 +157,13 @@ type GetPublicKeyResponse struct {
 //
 // swagger:model GetPublicKeyResponseBody
 type GetPublicKeyResponseBody struct {
-	// The public key encoded as per `public_key_encoding`
+	// The public key encoded as per `public-key-encoding`
 	//
 	// Required: true
 	// example: 0x79964e63752465973b6b3c610d8ac773fc7ce04f5d1ba599ba8768fb44cef525176f81d3c7603d5a2e466bc96da7b2443bef01b78059a98f45d5c440ca379463
-	PublicKey string `json:"public_key"`
+	PublicKey string `json:"public-key"`
 
-	// Encoding method used for encoding the `public_key`
+	// Encoding method used for encoding the `public-key`
 	//
 	// Required: true
 	// example: hex/0x-prefix
