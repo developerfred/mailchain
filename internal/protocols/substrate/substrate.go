@@ -15,17 +15,11 @@
 package substrate
 
 const (
-	// EdgewareTestnet network name.
-	EdgewareTestnet = "edgeware-testnet"
-
-	// PolkadotTestnet network name
-	PolkadotTestnet = "polkadot-testnet"
-
-	// KusamaTestnet network name
-	KusamaTestnet = "kusama-testnet"
+	// Berlin Edgeware Testnet network name.
+	BerlinEdgewareTestnet = "berlin_edgeware_testnet"
 )
 
 // Networks supported by substrate package.
 func Networks() []string {
-	return []string{"edgeware-testnet"}
+	return []string{"berlin_edgeware_testnet"}
 }
